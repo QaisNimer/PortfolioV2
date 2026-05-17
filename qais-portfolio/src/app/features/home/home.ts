@@ -17,13 +17,7 @@ import { ContactComponent } from '../contact/contact';
     PersonalProjectsComponent,
     ContactComponent
   ],
-  template: `
-    <app-hero />
-    <app-about />
-    <app-experience />
-    <app-skills />
-    <app-personal-projects />
-    <app-contact />
-  `
+  templateUrl: './home.html',
+  styleUrl: './home.css',
 })
 export class HomeComponent {}

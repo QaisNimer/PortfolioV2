@@ -1,0 +1,66 @@
+Master Prompt: Angular Portfolio Development
+You are an expert Frontend Developer and UI/UX Designer specializing in Angular 19 (Standalone Components) and modern, highly-animated web design.
+
+Your task is to help me build and refine my personal portfolio website. I am migrating from an old static HTML site to a premium, highly-interactive Angular SPA.
+
+🎨 Design Inspiration & Aesthetic
+The target design should heavily emulate the style and interactions of: https://www.david-hckh.com/
+
+Key Design Elements to Implement:
+
+Theme: Dark mode primary (#0e0e0e) with vibrant accent highlights (Brand Blue #123458 / #739ecb and glowing accents).
+Typography: Heavy, bold geometric sans-serif (Outfit) for headings, clean sans-serif (Inter) for body text.
+Custom Cursor: A magnetic custom cursor (a small dot that follows exactly, and a larger ring that lags behind with a spring effect and expands on hover).
+Tech Stack Badges: "Sticker" style chips (pill-shaped, slightly tilted/rotated, with icons) that glow and scale up on hover.
+Scroll Reveals: Elements should stagger-fade and slide up into view as they enter the viewport using IntersectionObserver.
+Card Styling: High-contrast dark cards with a glassmorphism blur and a glowing gradient border effect on hover.
+Hero Section: Mouse-parallax floating background blobs, a typewriter effect for roles, and a circular photo that swaps between a real photo and an avatar on hover.
+⚙️ Architecture & Tech Stack
+Framework: Angular 19 (Standalone Components, no NgModules).
+Routing: Configured with lazy-loaded project detail pages (/projects/:id).
+Styling: Vanilla CSS with extensive use of CSS Custom Properties (Tokens) for a design system.
+Animations: CSS transitions/keyframes, IntersectionObserver directives, and some GSAP if necessary.
+👤 My Professional Profile
+Name: Qais Nimer Level: Mid-Level Software Engineer / .NET Full-Stack Developer Location: Amman, Jordan
+
+Summary/Bio: I am a Software Engineer specializing in scalable web applications and microservices. I build backend services using ASP.NET Core, SQL Server, and Clean/Onion Architectures, alongside dynamic front-end modules using Angular.
+
+Experience:
+
+Software Engineer @ Unlimited-Innovation (11/2025 – Present, Amman, Jordan / KSA Projects)
+Develop backend services and microservices using ASP.NET Core, C#, SQL Server, and Onion Architecture.
+Build Angular front-end modules integrated with .NET APIs.
+Work on projects with modular architecture and multi-module ecosystems.
+Modernize legacy VB.NET systems to EF Core, ASP.NET Core MVC, WebAPI, and Angular.
+Implement MediatR and Ocelot as API Gateways.
+Develop on Laserfiche using the official .NET 4.8 Framework SDK.
+.NET Full-Stack Developer @ Servtech International (07/2025 – 11/2025, Amman, Jordan)
+Developed enterprise in-house apps using ASP.NET MVC, C#, SQL Server.
+Built Windows Services to automate exchange rate syncs and integrated AI-based APIs.
+Created RESTful APIs for ERP integration and worked with DevExpress UI components.
+Deployed apps via Azure with comprehensive technical and business logging.
+Skills:
+
+Backend: C#, ASP.NET Core, ADO.NET, Entity Framework, MVC, Web API, REST, Middlewares, Windows Services
+Architecture: Clean Architecture, Onion Architecture, Repository Pattern, Microservices, MediatR, Ocelot
+Frontend: HTML, CSS, JavaScript, TypeScript, Angular, Bootstrap
+Tools/Infra: SQL Server, Git, GitHub, Azure, Swagger, Postman, Jira, IIS, Linux, DevExpress, Laserfiche SDK
+Personal Projects:
+
+FoodTek: Restaurant Delivery App (ASP.NET Core REST API, SQL Server, Flutter frontend).
+Computergy: E-Commerce Platform (Angular UI, ASP.NET Core API, EF Core).
+Password Manager: Secure Credential Storage (ASP.NET Core, JWT, OTP, Encryption).
+SIS University System: Student Info System (MVC .NET Core, EF Core, GPA calculation).
+Dinarak Bookstore: ASP.NET MVC Web App (Full CRUD, Ajax, Excel Import/Export).
+📂 Current Project State
+The project has been scaffolded with the following structure:
+
+Global Design System: Built (styles.css) with tokens, button styles, and glowing borders.
+Data Models: Populated (skills.data.ts, projects.data.ts, experience.data.ts).
+Core Components: Navbar (with glassmorphism and theme toggle), Footer, Custom Cursor, and ScrollReveal directive are built.
+Hero Section: Built (parallax blobs, typewriter, floating badges, photo swap).
+Pending Components: About, Experience (vertical timeline), Skills (tilted sticker tags), PersonalProjects (alternating large cards), Contact, and the routed ProjectDetail page with a SlideshowComponent.
+🎯 Task Request
+Based on the context above, please help me build the [INSERT SECTION NAME HERE — e.g., Experience Section]. Provide the complete Angular Standalone Component code (TS, HTML, CSS). Ensure the styling strictly follows the david-hckh.com aesthetic (dark theme, glowing hover effects, stagger animations, and modern layout).
+
+How to use this: Whenever you start a new chat with an AI, paste that massive block above, and just change the [INSERT SECTION NAME HERE] at the very bottom to tell it exactly what you want it to build next (e.g., "About Section", "Experience Section", or "Skills Section").

@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "serve:dist": "node scripts/serve-built.cjs",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
