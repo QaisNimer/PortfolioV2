@@ -1,0 +1,66 @@
+<section class="contact-section" id="contact">
+  <div class="contact-orb"></div>
+
+  <div class="container contact-grid">
+    <div class="contact-copy" scrollReveal>
+      <p class="section-label">Contact</p>
+      <h2 class="section-title">Let us build something <span>clean and useful</span>.</h2>
+      <p>
+        I am open to .NET full-stack roles, Angular work, backend modernization,
+        API integrations, and production-facing enterprise modules.
+      </p>
+
+      <div class="contact-links">
+        @for (link of links; track link.href) {
+          <a class="contact-link hoverable" [href]="link.href" target="_blank" rel="noopener">
+            <i [class]="link.icon"></i>
+            <span>
+              <strong>{{ link.label }}</strong>
+              <small>{{ link.value }}</small>
+            </span>
+          </a>
+        }
+      </div>
+    </div>
+
+    <form class="contact-form glow-border" (ngSubmit)="send()" scrollReveal>
+      <div class="form-top">
+        <span>Direct message</span>
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+
+      <label>
+        <span>Name</span>
+        <input
+          name="name"
+          type="text"
+          autocomplete="name"
+          [(ngModel)]="form.name"
+          placeholder="Your name" />
+      </label>
+
+      <label>
+        <span>Email</span>
+        <input
+          name="email"
+          type="email"
+          autocomplete="email"
+          [(ngModel)]="form.email"
+          placeholder="you@example.com" />
+      </label>
+
+      <label>
+        <span>Message</span>
+        <textarea
+          name="message"
+          rows="5"
+          [(ngModel)]="form.message"
+          placeholder="Tell me what you want to build"></textarea>
+      </label>
+
+      <button class="btn-primary hoverable" type="submit">
+        Open email draft <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </form>
+  </div>
+</section>

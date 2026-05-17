@@ -1,0 +1,56 @@
+<header class="navbar" [class.scrolled]="isScrolled()">
+  <div class="nav-inner container">
+
+    <!-- Logo -->
+    <a class="logo hoverable" href="#hero" (click)="scrollTo('#hero')">
+      Qais Nimer
+    </a>
+
+    <!-- Desktop Nav Links -->
+    <nav class="nav-links" [class.menu-open]="menuOpen()">
+      @for (link of navLinks; track link.href) {
+        <a
+          class="nav-link hoverable"
+          [href]="link.href"
+          [class.active]="activeSection() === link.href.replace('#','')"
+          (click)="scrollTo(link.href); $event.preventDefault()">
+          {{ link.label }}
+        </a>
+      }
+    </nav>
+
+    <!-- Right Side: Hire Me + Theme -->
+    <div class="nav-actions">
+      <button class="theme-btn hoverable" (click)="toggleTheme()" [title]="theme.isDark() ? 'Switch to Light' : 'Switch to Dark'">
+        @if (theme.isDark()) {
+          <i class="fa-solid fa-sun"></i>
+        } @else {
+          <i class="fa-solid fa-moon"></i>
+        }
+      </button>
+
+      <a href="#contact" class="btn-primary hire-btn hoverable" (click)="scrollTo('#contact'); $event.preventDefault()">
+        Hire Me <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+      <!-- Hamburger -->
+      <button class="hamburger hoverable" (click)="toggleMenu()" [class.open]="menuOpen()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile Menu -->
+  @if (menuOpen()) {
+    <div class="mobile-menu">
+      @for (link of navLinks; track link.href) {
+        <a class="mobile-link hoverable"
+           [href]="link.href"
+           (click)="scrollTo(link.href); $event.preventDefault()">
+          {{ link.label }}
+        </a>
+      }
+    </div>
+  }
+</header>

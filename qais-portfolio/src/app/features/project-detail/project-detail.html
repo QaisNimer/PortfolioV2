@@ -1,0 +1,71 @@
+<section class="detail-section">
+  <div class="detail-bg"></div>
+
+  <div class="container">
+    <button class="back-link hoverable" type="button" (click)="backToProjects()">
+      <i class="fa-solid fa-arrow-left"></i>
+      Back to projects
+    </button>
+
+    @if (project) {
+      <header class="detail-hero">
+        <div>
+          <p class="section-label">Project detail</p>
+          <h1>{{ project.title }}</h1>
+          <p class="subtitle">{{ project.subtitle }}</p>
+        </div>
+
+        <div class="hero-actions">
+          @if (project.github) {
+            <a class="btn-outline hoverable" [href]="project.github" target="_blank" rel="noopener">
+              GitHub <i class="fa-brands fa-github"></i>
+            </a>
+          }
+          @if (project.liveDemo) {
+            <a class="btn-primary hoverable" [href]="project.liveDemo" target="_blank" rel="noopener">
+              Live demo <i class="fa-solid fa-up-right-from-square"></i>
+            </a>
+          }
+        </div>
+      </header>
+
+      <div class="detail-layout">
+        <div class="gallery-panel">
+          <app-slideshow [images]="project.images ?? []" [title]="project.title" />
+        </div>
+
+        <aside class="info-panel glow-border">
+          <div class="info-block">
+            <span>Overview</span>
+            <p>{{ project.description }}</p>
+          </div>
+
+          <div class="info-block">
+            <span>Key features</span>
+            <ul>
+              @for (feature of project.features; track feature) {
+                <li>{{ feature }}</li>
+              }
+            </ul>
+          </div>
+
+          <div class="info-block">
+            <span>Stack</span>
+            <div class="tech-list">
+              @for (tech of project.tech; track tech) {
+                <span>{{ tech }}</span>
+              }
+            </div>
+          </div>
+        </aside>
+      </div>
+    } @else {
+      <div class="not-found glow-border">
+        <p class="section-label">Project not found</p>
+        <h1>No matching project exists.</h1>
+        <p>The project route does not match the current portfolio data.</p>
+        <button class="btn-primary hoverable" type="button" (click)="backToProjects()">Return home</button>
+      </div>
+    }
+  </div>
+</section>

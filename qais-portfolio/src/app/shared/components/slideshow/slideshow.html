@@ -1,0 +1,34 @@
+@if (images.length) {
+  <div class="slideshow" aria-label="Project screenshot slideshow">
+    <div class="slide-frame">
+      <img [src]="currentImage()" [alt]="title + ' screenshot ' + (activeIndex + 1)" />
+
+      <button class="slide-btn prev hoverable" type="button" (click)="previous()" aria-label="Previous image">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button class="slide-btn next hoverable" type="button" (click)="next()" aria-label="Next image">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+
+      <span class="counter">{{ activeIndex + 1 }} / {{ images.length }}</span>
+    </div>
+
+    <div class="thumb-row" aria-label="Gallery thumbnails">
+      @for (image of images; track image; let i = $index) {
+        <button
+          class="thumb hoverable"
+          type="button"
+          [class.active]="i === activeIndex"
+          (click)="goTo(i)"
+          [attr.aria-label]="'Show image ' + (i + 1)">
+          <img [src]="image" [alt]="title + ' thumbnail ' + (i + 1)" loading="lazy" />
+        </button>
+      }
+    </div>
+  </div>
+} @else {
+  <div class="slideshow-empty">
+    <i class="fa-solid fa-image"></i>
+    <span>No gallery images available yet.</span>
+  </div>
+}

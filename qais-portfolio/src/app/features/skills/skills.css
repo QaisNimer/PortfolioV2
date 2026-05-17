@@ -1,0 +1,169 @@
+.skills-section {
+  position: relative;
+  background:
+    radial-gradient(circle at 80% 18%, rgba(14, 165, 233, 0.1), transparent 24%),
+    linear-gradient(180deg, var(--clr-bg), var(--clr-bg-alt));
+  overflow: hidden;
+}
+
+.skills-head {
+  max-width: 760px;
+  margin-bottom: 44px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.skill-group {
+  position: relative;
+  padding: 26px;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.skill-group::after {
+  content: '';
+  position: absolute;
+  inset: auto -20% -45% 22%;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(79, 142, 247, 0.18), transparent 68%);
+  filter: blur(22px);
+  opacity: 0;
+  transition: opacity var(--dur-med);
+}
+
+.skill-group:hover::after {
+  opacity: 1;
+}
+
+.group-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.group-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: rgba(79, 142, 247, 0.13);
+  border: 1px solid rgba(115, 158, 203, 0.28);
+  color: var(--clr-brand-light);
+  box-shadow: 0 0 18px rgba(79, 142, 247, 0.16);
+}
+
+.group-head span {
+  color: var(--clr-brand-light);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.group-head h3 {
+  margin-top: 3px;
+  color: var(--clr-text);
+}
+
+.group-description {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 22px;
+  font-size: 0.94rem;
+}
+
+.sticker-wall {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skill-sticker {
+  --tilt: 0deg;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 14px 8px 10px;
+  border-radius: var(--radius-full);
+  background: rgba(10, 10, 15, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  color: var(--clr-text);
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 800;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.22);
+  transition: transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
+  animation: stickerFloat 4s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+.skill-sticker:hover {
+  transform: translateY(-6px) scale(1.08) rotate(0deg);
+  background: rgba(18, 52, 88, 0.95);
+  border-color: rgba(115, 158, 203, 0.66);
+  box-shadow: 0 0 28px rgba(79, 142, 247, 0.38);
+}
+
+.skill-sticker img,
+.skill-monogram {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex: 0 0 24px;
+}
+
+.skill-sticker img {
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 3px;
+}
+
+.skill-monogram {
+  display: grid;
+  place-items: center;
+  background: rgba(115, 158, 203, 0.18);
+  color: var(--clr-brand-light);
+  font-size: 0.68rem;
+}
+
+@keyframes stickerFloat {
+  0%, 100% { translate: 0 0; }
+  50% { translate: 0 -3px; }
+}
+
+@media (max-width: 860px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .skill-group {
+    padding: 20px;
+  }
+
+  .sticker-wall {
+    gap: 10px;
+  }
+
+  .skill-sticker {
+    font-size: 0.8rem;
+    max-width: 100%;
+  }
+}

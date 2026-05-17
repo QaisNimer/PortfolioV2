@@ -1,0 +1,263 @@
+/* ── Hero Section ───────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+/* ── Background Blobs ─────────────────────────────────── */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  transition: transform 0.1s linear;
+}
+
+.blob-1 {
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(79, 142, 247, 0.18), transparent 70%);
+  top: -200px;
+  right: -100px;
+}
+
+.blob-2 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12), transparent 70%);
+  bottom: -100px;
+  left: -50px;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--clr-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--clr-border) 1px, transparent 1px);
+  background-size: 60px 60px;
+  opacity: 0.3;
+}
+
+/* ── Content Layout ─────────────────────────────────────── */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+}
+
+/* ── Left: Text ─────────────────────────────────────────── */
+.hero-text { display: flex; flex-direction: column; gap: 20px; }
+
+.greeting {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--clr-text-muted);
+  animation: fadeInUp 0.6s var(--ease-smooth) both;
+}
+
+.greeting-line {
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--clr-brand);
+  border-radius: 2px;
+}
+
+.hero-name {
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: var(--clr-text);
+  animation: fadeInUp 0.6s 0.1s var(--ease-smooth) both;
+}
+
+.hero-name span { color: var(--clr-brand); }
+
+/* Sticker badge */
+.sticker-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(79, 142, 247, 0.12);
+  border: 1px solid rgba(79, 142, 247, 0.3);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--clr-brand);
+  transform: rotate(-1.5deg);
+  width: fit-content;
+}
+
+/* Typewriter */
+.typewriter-wrap {
+  font-family: var(--font-heading);
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  font-weight: 500;
+  color: var(--clr-text-muted);
+  line-height: 1;
+}
+
+.typewriter-prefix { margin-right: 8px; }
+
+.typewriter-text {
+  color: var(--clr-text);
+  font-weight: 700;
+}
+
+.caret {
+  display: inline-block;
+  color: var(--clr-brand);
+  animation: blink 0.8s step-end infinite;
+  margin-left: 2px;
+}
+
+/* CTAs */
+.hero-ctas {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 4px;
+}
+
+/* ── Right: Photo ───────────────────────────────────────── */
+.hero-photo-wrap {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-photo {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(79, 142, 247, 0.3);
+  box-shadow: 0 0 60px rgba(79, 142, 247, 0.2);
+  transition: transform 0.1s linear;
+  flex-shrink: 0;
+}
+
+.hero-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  transition: opacity 0.5s var(--ease-smooth);
+}
+
+.photo-real   { opacity: 1; z-index: 1; }
+.photo-avatar { opacity: 0; z-index: 2; }
+
+.hero-photo:hover .photo-real   { opacity: 0; }
+.hero-photo:hover .photo-avatar { opacity: 1; }
+
+/* Floating badges */
+.float-badge {
+  position: absolute;
+  padding: 8px 16px;
+  background: var(--clr-bg-alt);
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-full);
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--clr-text);
+  backdrop-filter: blur(12px);
+  white-space: nowrap;
+  animation: float 4s ease-in-out infinite;
+  transition: transform 0.15s linear;
+  box-shadow: var(--shadow-card);
+}
+
+.badge-net     { top: 8%;   right: -5%;  animation-delay: 0s;    transform: rotate(3deg);  }
+.badge-angular { bottom: 12%; left: -8%; animation-delay: 1.5s;  transform: rotate(-2deg); }
+.badge-azure   { top: 55%;  right: -10%; animation-delay: 0.8s;  transform: rotate(1.5deg);}
+
+/* ── Scroll Hint ────────────────────────────────────────── */
+.scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid var(--clr-border);
+  background: var(--clr-bg-card);
+  color: var(--clr-text-muted);
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  animation: float 2s ease-in-out infinite;
+  transition: border-color var(--dur-fast), color var(--dur-fast);
+}
+
+.scroll-hint:hover {
+  border-color: var(--clr-brand);
+  color: var(--clr-brand);
+}
+
+/* ── Entrance (reveal handled by global classes + inline delays) */
+.reveal { opacity: 0; transform: translateY(30px); }
+.hero-content .reveal {
+  animation: fadeInUp 0.7s var(--ease-smooth) both;
+}
+.reveal.from-right { transform: translateX(40px); }
+.hero-content .reveal.from-right {
+  animation: fadeInRight 0.7s var(--ease-smooth) both;
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 40px;
+  }
+  .greeting, .hero-ctas, .sticker-badge {
+    justify-content: center;
+    margin: 0 auto;
+  }
+  .hero-photo-wrap { order: -1; }
+  .hero-photo { width: 240px; height: 240px; }
+  .badge-net, .badge-angular, .badge-azure { display: none; }
+}
+
+@media (max-width: 480px) {
+  .hero-photo { width: 200px; height: 200px; }
+  .hero-ctas { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; }
+}

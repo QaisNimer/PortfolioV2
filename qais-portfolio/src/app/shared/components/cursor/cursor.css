@@ -1,0 +1,59 @@
+/* Custom Cursor — hidden on touch/mobile via styles.css html { cursor: none } */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s;
+}
+
+/* Small dot — follows exactly */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--clr-brand);
+  transition: transform 0.1s var(--ease-spring),
+              background 0.2s;
+}
+
+.cursor-dot.clicking {
+  transform: translate(-50%, -50%) scale(0.6);
+}
+
+/* Larger ring — lags behind */
+.cursor-ring {
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--clr-brand);
+  background: transparent;
+  transition: width 0.3s var(--ease-spring),
+              height 0.3s var(--ease-spring),
+              border-color 0.2s,
+              background 0.2s,
+              opacity 0.2s;
+}
+
+/* Hover state — ring expands and fills slightly */
+.cursor-ring.hovering {
+  width: 52px;
+  height: 52px;
+  background: rgba(79, 142, 247, 0.12);
+  border-color: var(--clr-accent);
+}
+
+/* Click state — ring shrinks */
+.cursor-ring.clicking {
+  width: 28px;
+  height: 28px;
+  background: rgba(79, 142, 247, 0.25);
+}
+
+@media (max-width: 768px) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}

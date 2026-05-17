@@ -1,0 +1,61 @@
+<section class="hero" id="hero">
+  <!-- Parallax background layers -->
+  <div class="hero-bg">
+    <div class="hero-blob blob-1" [style.transform]="'translate(' + mouseX() * 0.4 + 'px,' + mouseY() * 0.4 + 'px)'"></div>
+    <div class="hero-blob blob-2" [style.transform]="'translate(' + mouseX() * -0.2 + 'px,' + mouseY() * -0.2 + 'px)'"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <div class="container hero-content">
+
+    <!-- Left: Text -->
+    <div class="hero-text">
+      <div class="greeting reveal" style="transition-delay:0.1s">
+        <span class="greeting-line"></span>
+        <span>Hello, I'm</span>
+      </div>
+
+      <h1 class="hero-name reveal" style="transition-delay:0.2s">
+        Qais<br /><span>Nimer</span>
+      </h1>
+
+      <div class="sticker-badge reveal" style="transition-delay:0.3s">
+        <i class="fa-solid fa-code"></i>
+        Software Engineer
+      </div>
+
+      <p class="typewriter-wrap reveal" style="transition-delay:0.4s">
+        <span class="typewriter-prefix">I build</span>
+        <span class="typewriter-text">{{ currentRole() }}<span class="caret">|</span></span>
+      </p>
+
+      <div class="hero-ctas reveal" style="transition-delay:0.55s">
+        <a href="#contact" class="btn-primary hoverable" (click)="$event.preventDefault(); scrollTo('contact')">
+          Hire Me <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <a href="assets/Qais Nimer .NET Full Stack Developer.pdf" download class="btn-outline hoverable">
+          Download CV <i class="fa-solid fa-file-arrow-down"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right: Photo -->
+    <div class="hero-photo-wrap reveal from-right" style="transition-delay:0.3s">
+      <div class="hero-photo" [style.transform]="'translate(' + mouseX() * -0.5 + 'px,' + mouseY() * -0.5 + 'px)'">
+        <img src="images/qais-real.jpg" alt="Qais Nimer" class="photo-real" />
+        <img src="images/avatar2.png"   alt="Avatar"      class="photo-avatar" />
+      </div>
+
+      <!-- Floating tech badges -->
+      <div class="float-badge badge-net"     [style.transform]="'translate(' + mouseX() * 0.6 + 'px,' + mouseY() * 0.3 + 'px)'">.NET Core</div>
+      <div class="float-badge badge-angular" [style.transform]="'translate(' + mouseX() * -0.7 + 'px,' + mouseY() * 0.5 + 'px)'">Angular</div>
+      <div class="float-badge badge-azure"   [style.transform]="'translate(' + mouseX() * 0.3 + 'px,' + mouseY() * -0.6 + 'px)'">Azure</div>
+    </div>
+
+  </div>
+
+  <!-- Scroll hint -->
+  <button class="scroll-hint hoverable" (click)="scrollDown()">
+    <i class="fa-solid fa-chevron-down"></i>
+  </button>
+</section>

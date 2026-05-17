@@ -1,0 +1,47 @@
+<section class="skills-section" id="skills">
+  <div class="container">
+    <div class="skills-head" scrollReveal>
+      <p class="section-label">Skills</p>
+      <h2 class="section-title">Sticker wall for the <span>stack I use</span>.</h2>
+      <p>
+        A practical mix of backend engineering, architecture, front-end delivery, and
+        the infrastructure tools needed to ship and operate enterprise applications.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+      @for (group of groups; track group.id; let groupIndex = $index) {
+        <article
+          class="skill-group glow-border"
+          [style.transition-delay.ms]="groupIndex * 110"
+          scrollReveal>
+          <header class="group-head">
+            <span class="group-icon"><i [class]="group.icon"></i></span>
+            <div>
+              <span>{{ group.eyebrow }}</span>
+              <h3>{{ group.title }}</h3>
+            </div>
+          </header>
+
+          <p class="group-description">{{ group.description }}</p>
+
+          <div class="sticker-wall">
+            @for (skill of skillsBy(group.id); track skill.name; let skillIndex = $index) {
+              <span
+                class="skill-sticker hoverable"
+                [style.--tilt]="(skill.rotation ?? 0) + 'deg'"
+                [style.animation-delay.ms]="skillIndex * 45">
+                @if (skill.icon) {
+                  <img [src]="skill.icon" [alt]="skill.name + ' logo'" loading="lazy" />
+                } @else {
+                  <span class="skill-monogram">{{ initials(skill.name) }}</span>
+                }
+                <span>{{ skill.name }}</span>
+              </span>
+            }
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+</section>

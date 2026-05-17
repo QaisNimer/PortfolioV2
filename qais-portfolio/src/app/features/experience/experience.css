@@ -1,0 +1,228 @@
+.experience-section {
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--clr-bg-alt), var(--clr-bg)),
+    radial-gradient(circle at 70% 10%, rgba(79, 142, 247, 0.14), transparent 30%);
+  overflow: hidden;
+}
+
+.section-head {
+  max-width: 760px;
+  margin-bottom: 54px;
+}
+
+.timeline {
+  position: relative;
+  display: grid;
+  gap: 34px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, rgba(115, 158, 203, 0.55), transparent);
+}
+
+.timeline-item {
+  position: relative;
+  width: min(100%, 560px);
+  padding: 1px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(14px);
+  box-shadow: var(--shadow-card);
+  transition: transform var(--dur-med) var(--ease-spring), box-shadow var(--dur-med);
+}
+
+.timeline-item:hover {
+  transform: translateY(-8px) rotate(-0.5deg);
+  box-shadow: 0 26px 70px rgba(18, 52, 88, 0.36);
+}
+
+.timeline-item.is-even {
+  margin-left: auto;
+}
+
+.timeline-marker {
+  position: absolute;
+  top: 28px;
+  right: -58px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--clr-bg);
+  border: 1px solid rgba(115, 158, 203, 0.48);
+  box-shadow: 0 0 24px rgba(79, 142, 247, 0.28);
+  z-index: 2;
+}
+
+.timeline-item.is-even .timeline-marker {
+  right: auto;
+  left: -58px;
+}
+
+.timeline-marker span {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--clr-brand-dark);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.timeline-card {
+  position: relative;
+  padding: 28px;
+  border-radius: inherit;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.065), rgba(255, 255, 255, 0.025));
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 14px;
+}
+
+.period {
+  display: inline-flex;
+  margin-bottom: 8px;
+  color: var(--clr-brand-light);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 0.76rem;
+}
+
+.timeline-card h3 {
+  color: var(--clr-text);
+  margin-bottom: 4px;
+}
+
+.company {
+  color: var(--clr-text);
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.current-badge {
+  align-self: flex-start;
+  padding: 7px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(79, 142, 247, 0.14);
+  border: 1px solid rgba(115, 158, 203, 0.38);
+  color: var(--clr-brand-light);
+  font-family: var(--font-heading);
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.location {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--clr-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.location i {
+  color: var(--clr-brand-light);
+}
+
+.highlight-list {
+  display: grid;
+  gap: 10px;
+  list-style: none;
+  margin-bottom: 22px;
+}
+
+.highlight-list li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+  font-size: 0.94rem;
+}
+
+.highlight-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-brand-light);
+  box-shadow: 0 0 14px rgba(115, 158, 203, 0.8);
+}
+
+.tech-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+@media (max-width: 1050px) {
+  .timeline::before {
+    left: 23px;
+  }
+
+  .timeline-item,
+  .timeline-item.is-even {
+    width: 100%;
+    margin-left: 0;
+    padding-left: 54px;
+  }
+
+  .timeline-marker,
+  .timeline-item.is-even .timeline-marker {
+    left: 0;
+    right: auto;
+  }
+}
+
+@media (max-width: 620px) {
+  .section-head {
+    margin-bottom: 34px;
+  }
+
+  .timeline-card {
+    padding: 22px;
+  }
+
+  .card-top {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .timeline-item,
+  .timeline-item.is-even {
+    padding-left: 42px;
+  }
+
+  .timeline-marker {
+    width: 36px;
+    height: 36px;
+  }
+
+  .timeline-marker span {
+    width: 24px;
+    height: 24px;
+    font-size: 0.72rem;
+  }
+}
