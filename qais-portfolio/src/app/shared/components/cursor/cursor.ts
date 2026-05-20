@@ -1,59 +1,93 @@
-import { Component, OnInit, OnDestroy, HostListener, Renderer2 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 
 @Component({
   selector: 'app-cursor',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './cursor.html',
   styleUrl: './cursor.css'
 })
-export class CursorComponent implements OnInit, OnDestroy {
-  dotX   = 0; dotY   = 0;
-  ringX  = 0; ringY  = 0;
-  isHovering = false;
-  isClicking = false;
+export class CursorComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('dot', { static: true }) private dotRef!: ElementRef<HTMLElement>;
+  @ViewChild('ring', { static: true }) private ringRef!: ElementRef<HTMLElement>;
 
   private animFrameId = 0;
   private targetX = 0;
   private targetY = 0;
+  private ringX = 0;
+  private ringY = 0;
+  private removeListeners: Array<() => void> = [];
 
-  ngOnInit(): void {
-    this.animate();
+  constructor(
+    private readonly ngZone: NgZone,
+    private readonly renderer: Renderer2
+  ) {}
+
+  ngAfterViewInit(): void {
+    this.ngZone.runOutsideAngular(() => {
+      this.removeListeners = [
+        this.renderer.listen('document', 'mousemove', (event: MouseEvent) => this.onMouseMove(event)),
+        this.renderer.listen('document', 'mousedown', () => this.setClicking(true)),
+        this.renderer.listen('document', 'mouseup', () => this.setClicking(false)),
+        this.renderer.listen('document', 'mouseover', (event: MouseEvent) => this.onMouseOver(event))
+      ];
+
+      this.animate();
+    });
   }
 
   ngOnDestroy(): void {
     cancelAnimationFrame(this.animFrameId);
+    this.removeListeners.forEach(removeListener => removeListener());
   }
 
-  @HostListener('document:mousemove', ['$event'])
-  onMouseMove(e: MouseEvent): void {
+  private onMouseMove(e: MouseEvent): void {
     this.targetX = e.clientX;
     this.targetY = e.clientY;
-    this.dotX = e.clientX;
-    this.dotY = e.clientY;
+    this.setPosition(this.dotRef.nativeElement, e.clientX, e.clientY);
   }
 
-  @HostListener('document:mousedown')
-  onMouseDown(): void { this.isClicking = true; }
-
-  @HostListener('document:mouseup')
-  onMouseUp(): void { this.isClicking = false; }
-
-  @HostListener('document:mouseover', ['$event'])
-  onMouseOver(e: MouseEvent): void {
+  private onMouseOver(e: MouseEvent): void {
     const target = e.target as HTMLElement;
-    this.isHovering = !!(
+    const isHovering = !!(
       target.closest('a') ||
       target.closest('button') ||
       target.closest('.hoverable')
     );
+
+    this.setClass(this.ringRef.nativeElement, 'hovering', isHovering);
   }
 
   private animate(): void {
-    // Smooth ring follows with lag
     this.ringX += (this.targetX - this.ringX) * 0.12;
     this.ringY += (this.targetY - this.ringY) * 0.12;
+    this.setPosition(this.ringRef.nativeElement, this.ringX, this.ringY);
     this.animFrameId = requestAnimationFrame(() => this.animate());
+  }
+
+  private setClicking(isClicking: boolean): void {
+    this.setClass(this.dotRef.nativeElement, 'clicking', isClicking);
+    this.setClass(this.ringRef.nativeElement, 'clicking', isClicking);
+  }
+
+  private setPosition(element: HTMLElement, x: number, y: number): void {
+    this.renderer.setStyle(element, 'left', `${x}px`);
+    this.renderer.setStyle(element, 'top', `${y}px`);
+  }
+
+  private setClass(element: HTMLElement, className: string, enabled: boolean): void {
+    if (enabled) {
+      this.renderer.addClass(element, className);
+      return;
+    }
+
+    this.renderer.removeClass(element, className);
   }
 }
