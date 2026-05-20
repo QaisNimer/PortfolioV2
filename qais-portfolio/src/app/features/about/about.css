@@ -162,6 +162,10 @@
   box-shadow: 0 0 22px rgba(79, 142, 247, 0.18);
 }
 
+:host-context([data-theme="light"]) .stack-node {
+  color: #cbd5df;
+}
+
 .stack-main {
   left: 50%;
   top: 50%;

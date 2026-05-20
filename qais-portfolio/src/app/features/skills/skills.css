@@ -113,6 +113,11 @@
   white-space: nowrap;
 }
 
+:host-context([data-theme="light"]) .skill-sticker,
+:host-context([data-theme="light"]) .skill-sticker:hover {
+  background: #4F8EF71A;
+}
+
 .skill-sticker:hover {
   transform: translateY(-6px) scale(1.08) rotate(0deg);
   background: rgba(18, 52, 88, 0.95);
