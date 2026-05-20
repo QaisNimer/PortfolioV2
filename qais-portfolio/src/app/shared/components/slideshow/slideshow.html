@@ -1,7 +1,14 @@
 @if (images.length) {
   <div class="slideshow" aria-label="Project screenshot slideshow">
     <div class="slide-frame">
-      <img [src]="currentImage()" [alt]="title + ' screenshot ' + (activeIndex + 1)" />
+      <a
+        class="image-link hoverable"
+        [href]="currentImage()"
+        target="_blank"
+        rel="noopener"
+        [attr.aria-label]="'Open ' + title + ' screenshot ' + (activeIndex + 1) + ' in a new tab'">
+        <img [src]="currentImage()" [alt]="title + ' screenshot ' + (activeIndex + 1)" />
+      </a>
 
       <button class="slide-btn prev hoverable" type="button" (click)="previous()" aria-label="Previous image">
         <i class="fa-solid fa-chevron-left"></i>
