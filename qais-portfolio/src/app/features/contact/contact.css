@@ -18,6 +18,17 @@
   pointer-events: none;
 }
 
+:host-context([data-theme="light"]) .contact-section {
+  background:
+    radial-gradient(circle at 78% 36%, rgba(79, 142, 247, 0.12), transparent 30%),
+    linear-gradient(180deg, #ffffff, #f4f6fb);
+}
+
+:host-context([data-theme="light"]) .contact-orb {
+  background: radial-gradient(circle, rgba(115, 158, 203, 0.22), transparent 68%);
+  opacity: 0.7;
+}
+
 .contact-grid {
   position: relative;
   z-index: 1;
@@ -56,6 +67,12 @@
   transition: transform var(--dur-fast) var(--ease-spring), border-color var(--dur-fast), box-shadow var(--dur-fast);
 }
 
+:host-context([data-theme="light"]) .contact-link {
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(18, 52, 88, 0.14);
+  box-shadow: 0 14px 34px rgba(18, 52, 88, 0.08);
+}
+
 .contact-link:hover {
   transform: translateX(6px);
   border-color: rgba(115, 158, 203, 0.5);
@@ -70,6 +87,11 @@
   border-radius: 50%;
   background: rgba(79, 142, 247, 0.12);
   color: var(--clr-brand-light);
+}
+
+:host-context([data-theme="light"]) .contact-link i {
+  background: #4F8EF71A;
+  color: #123458;
 }
 
 .contact-link strong,
@@ -95,6 +117,11 @@
   backdrop-filter: blur(18px);
 }
 
+:host-context([data-theme="light"]) .contact-form {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 24px 60px rgba(18, 52, 88, 0.16);
+}
+
 .form-top {
   display: flex;
   align-items: center;
@@ -106,6 +133,10 @@
   letter-spacing: 0.12em;
   text-transform: uppercase;
   font-size: 0.78rem;
+}
+
+:host-context([data-theme="light"]) .form-top {
+  color: #739ECB;
 }
 
 label {
@@ -134,6 +165,18 @@ textarea {
   transition: border-color var(--dur-fast), box-shadow var(--dur-fast), background var(--dur-fast);
 }
 
+:host-context([data-theme="light"]) input,
+:host-context([data-theme="light"]) textarea {
+  background: #f8fafc;
+  border-color: rgba(18, 52, 88, 0.16);
+  color: #111827;
+}
+
+:host-context([data-theme="light"]) input::placeholder,
+:host-context([data-theme="light"]) textarea::placeholder {
+  color: #7b8494;
+}
+
 textarea {
   resize: vertical;
   min-height: 140px;
@@ -144,6 +187,12 @@ textarea:focus {
   border-color: rgba(115, 158, 203, 0.65);
   box-shadow: 0 0 0 4px rgba(79, 142, 247, 0.12);
   background: rgba(10, 10, 15, 0.88);
+}
+
+:host-context([data-theme="light"]) input:focus,
+:host-context([data-theme="light"]) textarea:focus {
+  border-color: #739ECB;
+  background: #ffffff;
 }
 
 .contact-form .btn-primary {
