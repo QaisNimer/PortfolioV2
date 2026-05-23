@@ -29,18 +29,27 @@
 
 /* ── Logo ───────────────────────────────────────────────── */
 .logo {
-  font-family: var(--font-heading);
-  font-size: 1.25rem;
-  font-weight: 800;
-  font-style: italic;
-  color: var(--clr-text);
+  display: flex;
+  align-items: center;
+  width: 48px;
+  height: 48px;
   text-decoration: none;
-  letter-spacing: -0.02em;
-  transition: color var(--dur-fast);
+  transition: transform var(--dur-fast) var(--ease-spring),
+              opacity var(--dur-fast);
   flex-shrink: 0;
 }
 
-.logo:hover { color: var(--clr-brand); }
+.logo:hover {
+  opacity: 0.88;
+  transform: scale(1.04);
+}
+
+.logo-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
 
 /* ── Nav Links ──────────────────────────────────────────── */
 .nav-links {
@@ -239,5 +248,8 @@
 }
 
 @media (max-width: 480px) {
-  .logo { font-size: 1.1rem; }
+  .logo {
+    width: 42px;
+    height: 42px;
+  }
 }
