@@ -17,6 +17,10 @@ const contentTypes = {
   '.ico': 'image/x-icon',
   '.svg': 'image/svg+xml',
   '.pdf': 'application/pdf',
+  '.mp3': 'audio/mpeg',
+  '.ogg': 'audio/ogg',
+  '.wav': 'audio/wav',
+  '.m4a': 'audio/mp4',
 };
 
 const server = http.createServer((request, response) => {

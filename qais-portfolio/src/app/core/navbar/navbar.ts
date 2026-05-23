@@ -1,6 +1,7 @@
 import { Component, HostListener, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme';
+import { MusicService } from '../../services/music';
 
 @Component({
   selector: 'app-navbar',
@@ -11,6 +12,7 @@ import { ThemeService } from '../../services/theme';
 })
 export class NavbarComponent {
   theme = inject(ThemeService);
+  music = inject(MusicService);
   isScrolled = signal(false);
   menuOpen   = signal(false);
   activeSection = signal('hero');
@@ -53,5 +55,9 @@ export class NavbarComponent {
 
   toggleTheme(): void {
     this.theme.toggle();
+  }
+
+  toggleMusic(): void {
+    this.music.toggle();
   }
 }

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CursorComponent } from './shared/components/cursor/cursor';
 import { NavbarComponent } from './core/navbar/navbar';
 import { FooterComponent } from './core/footer/footer';
+import { MusicService } from './services/music';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,10 @@ import { FooterComponent } from './core/footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {}
+export class App {
+  private readonly music = inject(MusicService);
+
+  constructor() {
+    this.music.init();
+  }
+}

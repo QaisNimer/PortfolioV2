@@ -80,8 +80,9 @@
   gap: 12px;
 }
 
-/* Theme Button */
-.theme-btn {
+/* Icon Buttons */
+.theme-btn,
+.music-btn {
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -97,10 +98,24 @@
               transform var(--dur-fast) var(--ease-spring);
 }
 
-.theme-btn:hover {
+.theme-btn:hover,
+.music-btn:hover,
+.music-btn.playing {
   border-color: var(--clr-brand);
   color: var(--clr-brand);
+}
+
+.theme-btn:hover {
   transform: rotate(20deg) scale(1.1);
+}
+
+.music-btn:hover {
+  transform: scale(1.1);
+}
+
+.music-btn.blocked {
+  border-color: rgba(239, 68, 68, 0.45);
+  color: #ef4444;
 }
 
 /* Hire Me Button */
