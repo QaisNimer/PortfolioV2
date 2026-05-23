@@ -5,6 +5,7 @@ const path = require('node:path');
 const host = process.env.HOST || '127.0.0.1';
 const port = Number(process.env.PORT || 4200);
 const root = path.resolve(__dirname, '../dist/qais-portfolio/browser');
+const basePath = normalizeBasePath(process.env.BASE_PATH || '/PortfolioV2/');
 
 const contentTypes = {
   '.html': 'text/html; charset=utf-8',
@@ -24,7 +25,24 @@ const contentTypes = {
 };
 
 const server = http.createServer((request, response) => {
-  const requestPath = decodeURIComponent((request.url || '/').split('?')[0]);
+  let requestPath = decodeURIComponent((request.url || '/').split('?')[0]);
+
+  if (basePath !== '/') {
+    if (requestPath === '/' || requestPath === basePath.slice(0, -1)) {
+      response.writeHead(302, { Location: basePath });
+      response.end();
+      return;
+    }
+
+    if (!requestPath.startsWith(basePath)) {
+      response.writeHead(404);
+      response.end('Not found');
+      return;
+    }
+
+    requestPath = `/${requestPath.slice(basePath.length)}`;
+  }
+
   let filePath = path.join(root, requestPath === '/' ? 'index.html' : requestPath);
 
   if (!filePath.startsWith(root)) {
@@ -54,5 +72,13 @@ const server = http.createServer((request, response) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`Serving built portfolio at http://${host}:${port}/`);
+  console.log(`Serving built portfolio at http://${host}:${port}${basePath}`);
 });
+
+function normalizeBasePath(value) {
+  if (!value || value === '/') {
+    return '/';
+  }
+
+  return `/${value.replace(/^\/+|\/+$/g, '')}/`;
+}
