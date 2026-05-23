@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-const AUDIO_SRC = '/audio/opening-credits-game-of-thrones.mp3';
+const AUDIO_SRC = '/audio/MoodSong.mp3';
 const MUSIC_STATE_KEY = 'portfolio-music-state';
 const MUSIC_TIME_KEY = 'portfolio-music-time';
 const DEFAULT_VOLUME = 0.3;
