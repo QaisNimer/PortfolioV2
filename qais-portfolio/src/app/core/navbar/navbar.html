@@ -21,19 +21,32 @@
 
     <!-- Right Side: Hire Me + Theme -->
     <div class="nav-actions">
-      <button
-        class="music-btn hoverable"
-        [class.playing]="music.isPlaying()"
-        [class.blocked]="music.isBlocked() || music.isUnavailable()"
-        (click)="toggleMusic()"
-        [title]="music.title()"
-        [attr.aria-label]="music.title()">
-        @if (music.isPlaying()) {
-          <i class="fa-solid fa-volume-high"></i>
-        } @else {
-          <i class="fa-solid fa-volume-xmark"></i>
+      <div class="music-control" [class.tutorial-active]="showMusicTutorial()">
+        <button
+          class="music-btn hoverable"
+          data-music-toggle
+          [class.playing]="music.isPlaying()"
+          [class.blocked]="music.isBlocked() || music.isUnavailable()"
+          (click)="toggleMusic()"
+          [title]="music.title()"
+          [attr.aria-label]="music.title()">
+          @if (music.isPlaying()) {
+            <i class="fa-solid fa-volume-high"></i>
+          } @else {
+            <i class="fa-solid fa-volume-xmark"></i>
+          }
+        </button>
+
+        @if (showMusicTutorial()) {
+          <button
+            type="button"
+            class="music-tutorial hoverable"
+            (click)="dismissMusicTutorial($event)"
+            aria-label="Dismiss music hint">
+            Music is available while browsing
+          </button>
         }
-      </button>
+      </div>
 
       <button class="theme-btn hoverable" (click)="toggleTheme()" [title]="theme.isDark() ? 'Switch to Light' : 'Switch to Dark'">
         @if (theme.isDark()) {

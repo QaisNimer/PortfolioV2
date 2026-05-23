@@ -80,9 +80,16 @@
   gap: 12px;
 }
 
+.music-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
 /* Icon Buttons */
 .theme-btn,
 .music-btn {
+  position: relative;
   width: 38px;
   height: 38px;
   border-radius: 50%;
@@ -116,6 +123,56 @@
 .music-btn.blocked {
   border-color: rgba(239, 68, 68, 0.45);
   color: #ef4444;
+}
+
+.music-control.tutorial-active .music-btn {
+  border-color: var(--clr-brand);
+  color: var(--clr-brand);
+  box-shadow: 0 0 0 6px rgba(79, 142, 247, 0.14);
+}
+
+.music-control.tutorial-active .music-btn::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 1px solid rgba(79, 142, 247, 0.75);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: musicPulse 1.8s var(--ease-smooth) infinite;
+}
+
+.music-tutorial {
+  position: absolute;
+  top: calc(100% + 14px);
+  left: 50%;
+  z-index: 920;
+  width: max-content;
+  max-width: 220px;
+  padding: 9px 12px;
+  border: 1px solid var(--clr-border);
+  border-radius: var(--radius-sm);
+  background: var(--clr-bg-alt);
+  color: var(--clr-text);
+  box-shadow: var(--shadow-card);
+  font-family: var(--font-heading);
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  transform: translateX(-50%);
+  animation: fadeInUp 0.25s var(--ease-smooth);
+}
+
+@keyframes musicPulse {
+  0% {
+    opacity: 0.8;
+    transform: scale(0.85);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.35);
+  }
 }
 
 /* Hire Me Button */

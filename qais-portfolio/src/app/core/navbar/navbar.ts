@@ -1,7 +1,9 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme';
 import { MusicService } from '../../services/music';
+
+const MUSIC_TUTORIAL_KEY = 'portfolio-music-tutorial-seen';
 
 @Component({
   selector: 'app-navbar',
@@ -10,12 +12,14 @@ import { MusicService } from '../../services/music';
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit, OnDestroy {
   theme = inject(ThemeService);
   music = inject(MusicService);
   isScrolled = signal(false);
   menuOpen   = signal(false);
   activeSection = signal('hero');
+  showMusicTutorial = signal(false);
+  private musicTutorialTimeout: ReturnType<typeof setTimeout> | null = null;
 
   navLinks = [
     { label: 'About',            href: '#about'     },
@@ -24,6 +28,21 @@ export class NavbarComponent {
     { label: 'Personal Projects',href: '#projects'   },
     { label: 'Contact',          href: '#contact'    },
   ];
+
+  ngOnInit(): void {
+    if (this.canUseStorage() && localStorage.getItem(MUSIC_TUTORIAL_KEY) === 'true') {
+      return;
+    }
+
+    this.showMusicTutorial.set(true);
+    this.musicTutorialTimeout = setTimeout(() => {
+      this.dismissMusicTutorial();
+    }, 12000);
+  }
+
+  ngOnDestroy(): void {
+    this.clearMusicTutorialTimeout();
+  }
 
   @HostListener('window:scroll')
   onScroll(): void {
@@ -58,6 +77,30 @@ export class NavbarComponent {
   }
 
   toggleMusic(): void {
+    this.dismissMusicTutorial();
     this.music.toggle();
+  }
+
+  dismissMusicTutorial(event?: Event): void {
+    event?.stopPropagation();
+    this.showMusicTutorial.set(false);
+    this.clearMusicTutorialTimeout();
+
+    if (this.canUseStorage()) {
+      localStorage.setItem(MUSIC_TUTORIAL_KEY, 'true');
+    }
+  }
+
+  private clearMusicTutorialTimeout(): void {
+    if (this.musicTutorialTimeout) {
+      clearTimeout(this.musicTutorialTimeout);
+      this.musicTutorialTimeout = null;
+    }
+  }
+
+  private canUseStorage(): boolean {
+    return typeof localStorage !== 'undefined'
+      && typeof localStorage.getItem === 'function'
+      && typeof localStorage.setItem === 'function';
   }
 }

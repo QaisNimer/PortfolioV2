@@ -14,7 +14,17 @@ export class MusicService {
   private readonly _isUnavailable = signal(false);
   private audio: HTMLAudioElement | null = null;
   private initialized = false;
+  private waitingForInteraction = false;
   private lastSavedTime = 0;
+  private readonly interactionEvents = ['pointerdown', 'touchstart', 'keydown'] as const;
+  private readonly playAfterInteraction = (event: Event): void => {
+    const target = event.target instanceof Element ? event.target : null;
+    if (target?.closest('[data-music-toggle]')) {
+      return;
+    }
+
+    void this.play('playing');
+  };
 
   readonly isPlaying = this._isPlaying.asReadonly();
   readonly isBlocked = this._isBlocked.asReadonly();
@@ -73,6 +83,7 @@ export class MusicService {
       return;
     }
 
+    this.stopWaitingForInteraction();
     void this.play('playing');
   }
 
@@ -82,7 +93,7 @@ export class MusicService {
     }
 
     if (this._isBlocked()) {
-      return 'Music blocked by browser, click to play';
+      return 'Music blocked by browser, click anywhere to play';
     }
 
     return this._isPlaying() ? 'Pause music' : 'Play music';
@@ -95,10 +106,12 @@ export class MusicService {
 
     try {
       await this.audio.play();
+      this.stopWaitingForInteraction();
       this.setStoredState(stateToSave);
     } catch {
       this._isPlaying.set(false);
       this._isBlocked.set(true);
+      this.waitForInteraction();
     }
   }
 
@@ -106,8 +119,31 @@ export class MusicService {
     this.audio?.pause();
     this._isPlaying.set(false);
     this._isBlocked.set(false);
+    this.stopWaitingForInteraction();
     this.storeCurrentTime();
     this.setStoredState('paused');
+  }
+
+  private waitForInteraction(): void {
+    if (this.waitingForInteraction || this.getStoredState() === 'paused' || typeof document === 'undefined') {
+      return;
+    }
+
+    this.waitingForInteraction = true;
+    this.interactionEvents.forEach((eventName) => {
+      document.addEventListener(eventName, this.playAfterInteraction, { capture: true, passive: true });
+    });
+  }
+
+  private stopWaitingForInteraction(): void {
+    if (!this.waitingForInteraction || typeof document === 'undefined') {
+      return;
+    }
+
+    this.waitingForInteraction = false;
+    this.interactionEvents.forEach((eventName) => {
+      document.removeEventListener(eventName, this.playAfterInteraction, { capture: true });
+    });
   }
 
   private restoreCurrentTime(): void {
